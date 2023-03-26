@@ -25,7 +25,7 @@ logo: img/IMG_7469.jpg
 
   <script>
     // Set your ORCID ID
-    var orcid_id = "0000-0001-5533-2086";
+    var orcid_id = "YOUR_ORCID_ID_HERE";
 
     // Use the ORCID public API to retrieve your profile data
     fetch("https://pub.orcid.org/v3.0/" + orcid_id, {
@@ -59,14 +59,17 @@ logo: img/IMG_7469.jpg
       // Loop through the publications and add them to an unordered list on the web page
       for (var i = 0; i < publications.length; i++) {
         var pub = publications[i]['work-summary'][0];
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        var title = pub['title']['title']['value'];
-        var url = pub['url']['value'];
-        a.textContent = title;
-        a.href = url;
-        li.appendChild(a);
-        document.getElementById("pubs").appendChild(li);
+        // Only include publications that have been cited
+        if (pub['cited-by-count'] > 0) {
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          var title = pub['title']['title']['value'];
+          var url = pub['url']['value'];
+          a.textContent = title;
+          a.href = url;
+          li.appendChild(a);
+          document.getElementById("pubs").appendChild(li);
+        }
       }
     }).catch(function(error) {
       console.error(error);
