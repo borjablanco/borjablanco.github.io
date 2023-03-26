@@ -1,5 +1,40 @@
+---
 theme: jekyll-theme-minimal
 title: Borja Blanco
 description: Cognitive Neuroscience, PhD
 site_url: https://github.com/borjablanco/borjablanco.github.io/
 logo: img/IMG_7469.jpg
+---
+
+{% include head.html %}
+
+<body>
+  <h1>Publications</h1>
+  <ul id="pubs"></ul>
+
+  {% include footer.html %}
+
+  <script src="https://cdn.jsdelivr.net/npm/scholar.js/dist/scholar.min.js"></script>
+  <script>
+    var search_author = "Borja Blanco";
+    var limit = 10;
+
+    scholar.search(search_author, { 
+      'cites': limit 
+    }).then(function(data) {
+      var publications = data.results;
+
+      for (var i = 0; i < publications.length; i++) {
+        var pub = publications[i];
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        var title = pub.title;
+        var url = pub.url;
+        a.textContent = title;
+        a.href = url;
+        li.appendChild(a);
+        document.getElementById("pubs").appendChild(li);
+      }
+    });
+  </script>
+</body>
