@@ -25,7 +25,7 @@ logo: img/IMG_7469.jpg
 
   <script>
     // Set your ORCID ID
-    var orcid_id = "YOUR_ORCID_ID_HERE";
+    var orcid_id = "0000-0001-5533-2086";
 
     // Use the ORCID public API to retrieve your profile data
     fetch("https://pub.orcid.org/v3.0/" + orcid_id, {
